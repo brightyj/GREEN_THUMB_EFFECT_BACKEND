@@ -9,7 +9,9 @@ const cors=require("cors");
 const bcrypt = require('bcrypt');
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:['https://green-thumb-effect-frontend-7mxw.onrender.com','http://localhost:4000']
+}));
 
 //Database Connection With MongoDB
 
