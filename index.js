@@ -33,16 +33,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Creating Upload Endpoint for Images
-/* app.use('/images', express.static('upload/images'));
-app.post("/upload", upload.single('product'), (req, res) => {
-    res.json({
-        success: 1,
-        image_url: `https://green-thumb-effect-backend.onrender.com/upload/images/${req.file.filename}`
-    });
-    
-    });
- */
-
     app.use('/images', express.static('upload/images'));
 
 app.post("/upload", upload.single('product'), (req, res) => {
