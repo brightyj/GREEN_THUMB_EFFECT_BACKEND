@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 
 app.use(express.json());
 app.use(cors({
-    origin: ['https://green-thumb-effect-frontend-7mxw.onrender.com', 'https://green-thumb-effect-admin.onrender.com', 'https://localhost:3000'],
+    origin: ['https://green-thumb-effect-frontend-7mxw.onrender.com', 'https://green-thumb-effect-admin.onrender.com', 'http://localhost:5173'],
     credentials: true // Allow credentials
 }));
   
@@ -24,7 +24,9 @@ app.get("/", (req, res) => {
 
 // Image storage Engine
 const storage = multer.diskStorage({
-    destination: './upload/images',
+    destination:function(req,file,cb){
+        cb(null,'upload/images')
+      },
     filename: (req, file, cb) => {
         return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
     }
@@ -32,7 +34,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Creating Upload Endpoint for Images
-    app.use('/images', express.static('upload/images'));
+app.use(express.static(path.join(__dirname, 'upload')));
 
 app.post("/upload", upload.single('product'), (req, res) => {
     if (!req.file) {
@@ -42,7 +44,7 @@ app.post("/upload", upload.single('product'), (req, res) => {
     // File uploaded successfully
     res.json({
         success: 1,
-        image_url: `https://green-thumb-effect-backend.onrender.com/upload/images/${req.file.filename}`
+        image_url: `https://green-thumb-effect-backend.onrender.com/images/${req.file.filename}`
     });
 });
 
