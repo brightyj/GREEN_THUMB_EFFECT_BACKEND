@@ -43,9 +43,10 @@ app.post("/upload", upload.single('product'), (req, res) => {
     // File uploaded successfully
     res.json({
         success: 1,
-        image_url: `https://green-thumb-effect-backend.onrender.com/upload/images/z`
+        image_url: `https://green-thumb-effect-backend.onrender.com/upload/images/${req.file.filename}`
     });
 });
+
 
 // Schema for Creating Products
 const Product = mongoose.model("Product", {
