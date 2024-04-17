@@ -43,7 +43,7 @@ app.post("/upload", upload.single('product'), (req, res) => {
     // File uploaded successfully
     res.json({
         success: 1,
-        image_url: `http://localhost:4000/upload/images/${req.file.filename}`
+        image_url: `https://green-thumb-effect-backend.onrender.com/upload/images/z`
     });
 });
 
